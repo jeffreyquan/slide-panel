@@ -9,15 +9,24 @@
   </head>
   <body>
     <div class="container">
-      <button>Left</button>
+      <button class="btn__left">Left</button>
       <button>Right</button>
       <button>Bottom</button>
       <button>Top</button>
     </div>
 
-    <slide-panel>
+    <slide-panel class="my-panel" position="right">
       <div class="slide-panel__content">Test</div>
     </slide-panel>
     <script src="main.js"></script>
+    <script>
+      const leftButton = document.querySelector(".btn__left");
+
+      const panel = document.querySelector(".my-panel");
+
+      leftButton.addEventListener("click", (event) => {
+        panel.setAttribute("open", "");
+      });
+    </script>
   </body>
 </html>

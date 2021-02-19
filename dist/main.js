@@ -14,6 +14,14 @@ class SlidePanel extends HTMLElement {
         this._shadowRoot.appendChild(slidePanelTemplate.content.cloneNode(true));
     }
     connectedCallback() {
+        if (this.position) {
+            this.setAnchorClass(this.position);
+        }
+        if (!this.open) {
+            const root = this._shadowRoot.querySelector(".slide-panel");
+            root === null || root === void 0 ? void 0 : root.setAttribute("aria-hidden", "true");
+            root === null || root === void 0 ? void 0 : root.setAttribute("hidden", "");
+        }
     }
     _upgradeProperty(prop) {
         if (this.hasOwnProperty(prop)) {
@@ -26,9 +34,42 @@ class SlidePanel extends HTMLElement {
         return ["open", "position"];
     }
     attributeChangedCallback(attrName, oldVal, newVal) {
+        if (attrName === "open") {
+            const root = this._shadowRoot.querySelector(".slide-panel");
+            root === null || root === void 0 ? void 0 : root.setAttribute("aria-hidden", "false");
+            root === null || root === void 0 ? void 0 : root.removeAttribute("hidden");
+        }
+    }
+    get position() {
+        return this.getAttribute("position");
+    }
+    getAnchorClass(position) {
+        let className = "slide-panel__anchor";
+        switch (position) {
+            case "left":
+                className += "--left";
+                break;
+            case "right":
+                className += "--right";
+                break;
+            case "top":
+                className += "--top";
+                break;
+            case "bottom":
+                className += "--bottom";
+                break;
+            default:
+                className += "--left";
+        }
+        return className;
+    }
+    setAnchorClass(position) {
+        const className = this.getAnchorClass(position);
+        const panel = this._shadowRoot.querySelector(".slide-panel__panel");
+        panel === null || panel === void 0 ? void 0 : panel.classList.add(className);
     }
     get open() {
-        return this.getAttribute("open");
+        return this.getAttribute("open") || false;
     }
     attachEventListeners() {
     }
