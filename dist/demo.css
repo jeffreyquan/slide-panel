@@ -1,0 +1,11 @@
+:root {
+}
+
+.container {
+  padding: 16px;
+  width: 500px;
+}
+
+.slide-panel__content {
+  width: 250px;
+}
