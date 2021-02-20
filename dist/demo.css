@@ -2,8 +2,10 @@
 }
 
 .container {
+  margin: 0 auto;
   padding: 16px;
   width: 500px;
+  text-align: center;
 }
 
 .slide-panel__content {

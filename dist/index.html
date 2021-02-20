@@ -10,22 +10,59 @@
   <body>
     <div class="container">
       <button class="btn__left">Left</button>
-      <button>Right</button>
-      <button>Bottom</button>
-      <button>Top</button>
+      <button class="btn__right">Right</button>
+      <button class="btn__bottom">Bottom</button>
+      <button class="btn__top">Top</button>
     </div>
 
-    <slide-panel class="my-panel" position="right">
+    <slide-panel class="my-panel__left" position="left">
       <div class="slide-panel__content">Test</div>
     </slide-panel>
+
+    <slide-panel class="my-panel__right" position="right">
+      <div class="slide-panel__content">Test</div>
+    </slide-panel>
+
+    <slide-panel class="my-panel__bottom" position="bottom">
+      <div class="slide-panel__content">Test</div>
+    </slide-panel>
+
+    <slide-panel class="my-panel__top" position="top">
+      <div class="slide-panel__content">Test</div>
+    </slide-panel>
+
     <script src="main.js"></script>
     <script>
       const leftButton = document.querySelector(".btn__left");
 
-      const panel = document.querySelector(".my-panel");
+      const rightButton = document.querySelector(".btn__right");
+
+      const bottomButton = document.querySelector(".btn__bottom");
+
+      const topButton = document.querySelector(".btn__top");
+
+      const leftPanel = document.querySelector(".my-panel__left");
+
+      const rightPanel = document.querySelector(".my-panel__right");
+
+      const bottomPanel = document.querySelector(".my-panel__bottom");
+
+      const topPanel = document.querySelector(".my-panel__top");
 
       leftButton.addEventListener("click", (event) => {
-        panel.setAttribute("open", "");
+        leftPanel.setAttribute("open", "");
+      });
+
+      rightButton.addEventListener("click", (event) => {
+        rightPanel.setAttribute("open", "");
+      });
+
+      bottomButton.addEventListener("click", (event) => {
+        bottomPanel.setAttribute("open", "");
+      });
+
+      topButton.addEventListener("click", (event) => {
+        topPanel.setAttribute("open", "");
       });
     </script>
   </body>
