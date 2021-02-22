@@ -1,14 +1,17 @@
-import style from "./style.css";
+import styleSheet from "./style.css";
 import template from "./template.html";
 
 const slidePanelTemplate = document.createElement("template");
 
 slidePanelTemplate.innerHTML = `
-<style>${style}</style>
-${template}
-`
+  <style>
+    ${styleSheet}</style>
+  ${template}
+  `
 class SlidePanel extends HTMLElement {
   private _shadowRoot: ShadowRoot;
+
+  private timeoutId: number;
 
   [key: string]: any;
 
@@ -18,29 +21,28 @@ class SlidePanel extends HTMLElement {
     this._shadowRoot = this.attachShadow({ mode: "open" });
 
     this._shadowRoot.appendChild(slidePanelTemplate.content.cloneNode(true));
+
+    this.timeoutId = 0;
+
+    this.updateTransitionDuration(this.transitionDuration);
+    
   }
 
   connectedCallback() {
     this.attachEventListeners();
     if (this.position) {
       this.setAnchorClass(this.position);
+    } else {
+      this.setAnchorClass()
+    }
+
+    if (this.transitionDuration) {
+      this.updateTransitionDuration(this.transitionDuration)
     }
 
     this._upgradeProperty("open");
     this._upgradeProperty("transitionDuration");
     this._upgradeProperty("position");
-
-    const backdrop = this.getBackdrop();
-    if (backdrop) {
-      backdrop.style.transitionDuration = this.transitionDuration + "ms";
-    }
-
-    const panel = this.getPanel();
-    if (panel) {
-      console.log(panel);
-      console.log(this.transitionDuration);
-      panel.style.transitionDuration = this.transitionDuration + "ms";
-    }
 
     if (!this.open) {
       this.hideRoot();
@@ -76,7 +78,8 @@ class SlidePanel extends HTMLElement {
     const root = this.getRoot();
     root?.setAttribute("aria-hidden", "true");
     if (root) {
-      setTimeout(() => {
+      clearTimeout(this.timeoutId);
+      this.timeoutId = setTimeout(() => {
         root.style.visibility = "hidden";
       }, parseInt(this.transitionDuration))
     }
@@ -94,7 +97,8 @@ class SlidePanel extends HTMLElement {
     const panel = this.getPanel();
     if (panel) {
       panel.style.removeProperty("transform");
-      setTimeout(() => {
+      clearTimeout(this.timeoutId);
+      this.timeoutId = setTimeout(() => {
         panel.style.visibility = "hidden";
       }, parseInt(this.transitionDuration));
     }
@@ -109,19 +113,13 @@ class SlidePanel extends HTMLElement {
 }
 
   static get observedAttributes() {
-    return ["open", "position"];
+    return ["open", "position", "transitionDuration"];
   }
 
   attributeChangedCallback(attrName: string, oldVal: string, newVal: string) {
-    console.log({
-        attrName,
-        oldVal,
-        newVal
-    })
 
     if (attrName === "open" && oldVal !== newVal) {
       if (newVal !== null) {
-        console.log("open panel");
         this.showRoot();
         this.showBackdrop();
         this.showPanel();
@@ -137,10 +135,12 @@ class SlidePanel extends HTMLElement {
       this.removeAnchorClass(oldVal);
       this.setAnchorClass(newVal);
     }
-  }
 
-  get position() {
-    return this.getAttribute("position");
+    if (attrName === "transitionDuration") {
+      if (oldVal !== newVal) {
+        this.updateTransitionDuration(newVal);
+      }
+    }
   }
 
   getAnchorClass(position: string) {
@@ -171,7 +171,7 @@ class SlidePanel extends HTMLElement {
     panel?.classList.remove(className);
   }
 
-  setAnchorClass(position: string) {
+  setAnchorClass(position: string = "left") {
     const className = this.getAnchorClass(position);
     const panel = this.getPanel();
     panel?.classList.add(className);
@@ -190,14 +190,27 @@ class SlidePanel extends HTMLElement {
     }
   }
 
+  get position() {
+    return this.getAttribute("position");
+  }
+
+  set position(value) {
+    this.position = value;
+  }
+
   get transitionDuration() {
     return this.getAttribute("transitionDuration") || "300";
+  }
+
+  set transitionDuration(value) {
+    if (value) {
+      this.transitionDuration = value;
+    }
   }
 
   attachEventListeners() {
     const backdrop = this.getBackdrop();
     backdrop?.addEventListener("click", () => {
-      console.log("backdrop click");
        this._handleBackdropClick();
     })
   }
@@ -209,8 +222,29 @@ class SlidePanel extends HTMLElement {
   showPanel() {
     const panel = this.getPanel();
     if (panel) {
-      panel.style.transform = "none";
       panel.style.removeProperty("visibility");
+    }
+  }
+
+  updateTransitionDuration(transitionDuration: string) {
+    const style = this._shadowRoot.querySelector("style");
+    if (style) {
+      style.textContent = `
+      :host {
+        transition-duration: ${transitionDuration}ms;
+      }
+      ${styleSheet}
+    `
+    }
+
+    const backdrop = this.getBackdrop();
+    if (backdrop) {
+      backdrop.style.transitionDuration = this.transitionDuration + "ms";
+    }
+
+    const panel = this.getPanel();
+    if (panel) {
+      panel.style.transitionDuration = this.transitionDuration + "ms";
     }
   }
 

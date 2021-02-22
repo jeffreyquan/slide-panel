@@ -1,9 +1,17 @@
 :host {
-  --slide-panel-width: 250px;
-  --slide-panel-height: 250px; }
+  visibility: hidden;
+  transition-property: visibility; }
 
-::slotted(*) {
-  visibility: hidden; }
+:host([open]) {
+  visibility: visible; }
+  :host([open]) .slide-panel__backdrop {
+    opacity: 1;
+    visibility: visible; }
+  :host([open]) .slide-panel__panel {
+    transform: none; }
+
+::slotted(div) {
+  box-sizing: border-box; }
 
 .slide-panel {
   position: fixed;
