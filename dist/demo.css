@@ -4,10 +4,58 @@
 .container {
   margin: 0 auto;
   padding: 16px;
-  width: 500px;
+  max-width: 500px;
   text-align: center;
+  min-height: 100vh;
+}
+
+.title {
+  font-size: 48px;
+  color: #0f52ba;
+}
+
+.btn-group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  padding: 32px;
+  border-radius: 4px;
 }
 
 .slide-panel__content {
-  width: 250px;
+  width: 40vw;
+}
+
+.btn {
+  cursor: pointer;
+  padding: 8px 16px;
+}
+
+.btn:not(:last-child) {
+  margin-right: 8px;
+}
+
+.my-panel__left {
+  --slide-panel-background-color: #ff756d;
+}
+
+.my-panel__right {
+  --slide-panel-background-color: #fff49c;
+}
+
+.my-panel__bottom {
+  --slide-panel-background-color: #85de77;
+}
+
+.my-panel__bottom .slide-panel__content {
+  height: 40vh;
+}
+
+.my-panel__top {
+  --slide-panel-background-color: #f9ffcb;
+}
+
+.my-panel__top .slide-panel__content {
+  height: 40vh;
 }

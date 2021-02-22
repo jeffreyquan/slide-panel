@@ -42,7 +42,7 @@
   }
 
   &__panel {
-    width: var(--slide-panel-width, 300px);
+    width: inherit;
     background-color: var(--slide-panel-background-color, #ffffff);
     position: fixed;
     height: 100%;
@@ -74,7 +74,7 @@
       left: 0;
       right: 0;
       width: auto;
-      height: var(--slide-panel-height, 300px);
+      height: inherit;
       transform: translateY(-100%);
     }
 
@@ -83,7 +83,7 @@
       right: 0;
       bottom: 0;
       width: auto;
-      height: var(--slide-panel-height, 300px);
+      height: inherit;
       transform: translateY(100%);
     }
   }
