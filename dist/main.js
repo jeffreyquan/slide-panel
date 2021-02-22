@@ -8,6 +8,12 @@ slidePanelTemplate.innerHTML = `
     ${css_248z}</style>
   ${template}
   `;
+const slidePanelOpen = new CustomEvent("slide-panel-open", {
+    bubbles: true
+});
+const slidePanelClose = new CustomEvent("slide-panel-close", {
+    bubbles: true
+});
 class SlidePanel extends HTMLElement {
     constructor() {
         super();
@@ -100,11 +106,14 @@ class SlidePanel extends HTMLElement {
                 this.showBackdrop();
                 this.showPanel();
                 this.attachEventListeners();
+                this.dispatchEvent(slidePanelOpen);
             }
             else {
                 this.hideRoot();
                 this.hideBackdrop();
                 this.hidePanel();
+                this.dispatchEvent(slidePanelClose);
+                document.removeEventListener("keydown", this._handleKeyDown.bind(this));
             }
         }
         if (attrName === "position") {
@@ -178,6 +187,7 @@ class SlidePanel extends HTMLElement {
         backdrop === null || backdrop === void 0 ? void 0 : backdrop.addEventListener("click", () => {
             this._handleBackdropClick();
         });
+        document.addEventListener("keydown", this._handleKeyDown.bind(this));
     }
     getPanel() {
         return this._shadowRoot.querySelector('.slide-panel__panel');
@@ -205,6 +215,12 @@ class SlidePanel extends HTMLElement {
         const panel = this.getPanel();
         if (panel) {
             panel.style.transitionDuration = this.transitionDuration + "ms";
+        }
+    }
+    _handleKeyDown(event) {
+        event.preventDefault();
+        if (event.key === "Escape") {
+            this.open = false;
         }
     }
     _handleBackdropClick() {

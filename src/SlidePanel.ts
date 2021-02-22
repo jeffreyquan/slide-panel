@@ -8,6 +8,14 @@ slidePanelTemplate.innerHTML = `
     ${styleSheet}</style>
   ${template}
   `
+
+const slidePanelOpen = new CustomEvent("slide-panel-open", {
+  bubbles: true
+});
+
+const slidePanelClose = new CustomEvent("slide-panel-close", {
+  bubbles: true
+});
 class SlidePanel extends HTMLElement {
   private _shadowRoot: ShadowRoot;
 
@@ -24,8 +32,7 @@ class SlidePanel extends HTMLElement {
 
     this.timeoutId = 0;
 
-    this.updateTransitionDuration(this.transitionDuration);
-    
+    this.updateTransitionDuration(this.transitionDuration);  
   }
 
   connectedCallback() {
@@ -124,10 +131,16 @@ class SlidePanel extends HTMLElement {
         this.showBackdrop();
         this.showPanel();
         this.attachEventListeners();
+
+        this.dispatchEvent(slidePanelOpen);
       } else {
         this.hideRoot();
         this.hideBackdrop();
         this.hidePanel();
+
+        this.dispatchEvent(slidePanelClose);
+
+        document.removeEventListener("keydown", this._handleKeyDown.bind(this));
       }
     }
 
@@ -213,6 +226,8 @@ class SlidePanel extends HTMLElement {
     backdrop?.addEventListener("click", () => {
        this._handleBackdropClick();
     })
+
+    document.addEventListener("keydown", this._handleKeyDown.bind(this));
   }
 
   getPanel() {
@@ -245,6 +260,13 @@ class SlidePanel extends HTMLElement {
     const panel = this.getPanel();
     if (panel) {
       panel.style.transitionDuration = this.transitionDuration + "ms";
+    }
+  }
+
+  private _handleKeyDown(event: KeyboardEvent) {
+    event.preventDefault();
+    if (event.key === "Escape") {
+      this.open = false;
     }
   }
 
