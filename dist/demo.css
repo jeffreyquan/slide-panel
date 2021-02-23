@@ -28,8 +28,18 @@
 }
 
 .btn {
+  color: white;
+  background-color: #1976d2;
   cursor: pointer;
+  outline: none;
+  border: 1px solid #1976d2;
+  border-radius: 4px;
   padding: 8px 16px;
+}
+
+.btn:hover {
+  background-color: rgb(17, 82, 147);
+  border: 1px solid rgb(17, 82, 147);
 }
 
 .btn:not(:last-child) {
@@ -37,15 +47,15 @@
 }
 
 .my-panel__left {
-  --slide-panel-background-color: #ff756d;
+  --slide-panel-background-color: #fec8d8;
 }
 
 .my-panel__right {
-  --slide-panel-background-color: #fff49c;
+  --slide-panel-background-color: #d8e9f7;
 }
 
 .my-panel__bottom {
-  --slide-panel-background-color: #85de77;
+  --slide-panel-background-color: #ffdfd3;
 }
 
 .my-panel__bottom .slide-panel__content {
@@ -58,4 +68,25 @@
 
 .my-panel__top .slide-panel__content {
   height: 40vh;
+}
+
+.cta {
+  margin-top: 32px;
+  text-align: center;
+}
+
+.btn-cta {
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-cta span {
+  margin-right: 8px;
+  font-size: 20px;
+}
+
+.cta a {
+  text-decoration: none;
 }
