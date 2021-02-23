@@ -36,7 +36,7 @@
     z-index: var(--slide-panel-panel-z-index, 1000);
     overflow-y: auto;
     transition-property: transform;
-    transition-timing-function: ease-in-out;
+    transition-timing-function: var(--slide-panel-transition-timing-function, ease-in-out);
     box-shadow: var(--slide-panel-box-shadow, 0px 2px 3px -1px black, 0px 4px 6px 1px black, 0px 3px 8px 1px black); }
     .slide-panel__panel--left {
       top: 0;

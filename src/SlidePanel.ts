@@ -33,6 +33,7 @@ class SlidePanel extends HTMLElement {
     this.timeoutId = 0;
 
     this.updateTransitionDuration(this.transitionDuration);  
+  
   }
 
   connectedCallback() {
@@ -124,6 +125,9 @@ class SlidePanel extends HTMLElement {
   }
 
   attributeChangedCallback(attrName: string, oldVal: string, newVal: string) {
+    if (oldVal === newVal) {
+      return;
+    }
 
     if (attrName === "open" && oldVal !== newVal) {
       if (newVal !== null) {
@@ -153,6 +157,10 @@ class SlidePanel extends HTMLElement {
       if (oldVal !== newVal) {
         this.updateTransitionDuration(newVal);
       }
+    }
+
+    if (attrName === "handleClose") {
+      console.log(this.handleClose)
     }
   }
 
@@ -219,6 +227,14 @@ class SlidePanel extends HTMLElement {
     if (value) {
       this.transitionDuration = value;
     }
+  }
+
+  get handleClose() {
+    return this.getAttribute("handleClose")
+  }
+
+  set handleClose(value) {
+    this.handleClose = value;
   }
 
   attachEventListeners() {

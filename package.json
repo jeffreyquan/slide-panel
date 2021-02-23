@@ -1,6 +1,6 @@
 {
   "name": "slide-panel",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Slide Panel Web Component",
   "main": "dist/main.js",
   "scripts": {
@@ -13,9 +13,9 @@
   },
   "keywords": [
     "web-components",
-    "flip-card",
-    "flip",
-    "card",
+    "slide-panel",
+    "slide",
+    "panel",
     "component"
   ],
   "author": "Jeffrey Quan",
