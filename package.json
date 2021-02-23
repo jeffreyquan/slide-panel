@@ -1,6 +1,6 @@
 {
   "name": "slide-panel",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "description": "Slide Panel Web Component",
   "main": "dist/main.js",
   "scripts": {

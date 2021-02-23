@@ -33,11 +33,11 @@ class SlidePanel extends HTMLElement {
     this.timeoutId = 0;
 
     this.updateTransitionDuration(this.transitionDuration);  
-  
   }
 
   connectedCallback() {
     this.attachEventListeners();
+
     if (this.position) {
       this.setAnchorClass(this.position);
     } else {
@@ -113,12 +113,12 @@ class SlidePanel extends HTMLElement {
   }
 
   _upgradeProperty(prop: string) {
-  if (this.hasOwnProperty(prop)) {
-    let value = this[prop];
-    delete this[prop];
-    this[prop] = value;
+    if (this.hasOwnProperty(prop)) {
+      let value = this[prop];
+      delete this[prop];
+      this[prop] = value;
+    }
   }
-}
 
   static get observedAttributes() {
     return ["open", "position", "transitionDuration"];
@@ -129,8 +129,8 @@ class SlidePanel extends HTMLElement {
       return;
     }
 
-    if (attrName === "open" && oldVal !== newVal) {
-      if (newVal !== null) {
+    if (attrName === "open") {
+      if (newVal === "" || newVal === "true") {
         this.showRoot();
         this.showBackdrop();
         this.showPanel();
@@ -154,13 +154,7 @@ class SlidePanel extends HTMLElement {
     }
 
     if (attrName === "transitionDuration") {
-      if (oldVal !== newVal) {
-        this.updateTransitionDuration(newVal);
-      }
-    }
-
-    if (attrName === "handleClose") {
-      console.log(this.handleClose)
+      this.updateTransitionDuration(newVal);
     }
   }
 
@@ -199,15 +193,15 @@ class SlidePanel extends HTMLElement {
   }
 
   get open() {
-    return this.hasAttribute("open");
+    return Boolean(this.getAttribute("open"));
   }
 
   set open(value) {
     const isOpen = Boolean(value);
     if (isOpen) {
-      this.setAttribute("open", "");
+      this.setAttribute("open", "true");
     } else {
-      this.removeAttribute("open");
+      this.setAttribute("open", "false");
     }
   }
 

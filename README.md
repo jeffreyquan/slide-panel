@@ -16,11 +16,11 @@ Features:
 
 ### HTML
 
-Coming soon.
+Visit the following [link](https://slide-panel.netlify.app/) for an example of usage in plain HTML.
 
 ### React
 
-Coming soon.
+Visit this [Code Sandbox](https://codesandbox.io/s/slide-panel-yejbt) for an example of usage in React.
 
 ## Installation
 
@@ -68,20 +68,18 @@ The `open` property is used to determine whether the panel is opened or closed.
   const panel = document.querySelector(".panel");
 
   btn.addEventListener("click", (event) => {
-    panel.setAttribute("open", "");
+    panel.setAttribute("open", "true");
   });
 </script>
 ```
 
 ### Props
 
-All props are optional.
-
-| Prop                 | Type                                                                       | Default                     | Description                                       |
-| -------------------- | -------------------------------------------------------------------------- | --------------------------- | ------------------------------------------------- |
-| `open`               | `open` (or `open="true"`) \| `open="false"` (or don't include open at all) | `"false"` (panel is closed) | Whether the panel is opened or closed.            |
-| `position`           | `"left" \| "right" \| "top" \| "bottom"`                                   | `"left"`                    | Where the panel opens from.                       |
-| `transitionDuration` | Number enclosed in strings in milliseconds e.g. `"500"`                    | `"300"`                     | Transition duration of opening and closing panel. |
+| Prop                 | Type                                                    | Default                     | Description                                       |
+| -------------------- | ------------------------------------------------------- | --------------------------- | ------------------------------------------------- |
+| `open`               | `"true" \| "false"`                                     | `"false"` (panel is closed) | Whether the panel is opened or closed.            |
+| `position`           | `"left" \| "right" \| "top" \| "bottom"`                | `"left"`                    | Where the panel opens from.                       |
+| `transitionDuration` | Number enclosed in strings in milliseconds e.g. `"500"` | `"300"`                     | Transition duration of opening and closing panel. |
 
 ### Events
 

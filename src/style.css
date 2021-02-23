@@ -2,12 +2,12 @@
   visibility: hidden;
   transition-property: visibility; }
 
-:host([open]) {
+:host([open="true"]) {
   visibility: visible; }
-  :host([open]) .slide-panel__backdrop {
+  :host([open="true"]) .slide-panel__backdrop {
     opacity: 1;
     visibility: visible; }
-  :host([open]) .slide-panel__panel {
+  :host([open="true"]) .slide-panel__panel {
     transform: none; }
 
 ::slotted(div) {

@@ -47,7 +47,16 @@
       </div>
     </div>
 
-    <slide-panel class="my-panel__left" transitionDuration="300">
+    <script>
+      const handleClose = () => console.log("handling close");
+    </script>
+
+    <slide-panel
+      class="my-panel__left"
+      open="false"
+      transitionDuration="300"
+      handleClose="handleClose()"
+    >
       <div class="slide-panel__content"></div>
     </slide-panel>
 
@@ -81,19 +90,19 @@
       const topPanel = document.querySelector(".my-panel__top");
 
       leftButton.addEventListener("click", (event) => {
-        leftPanel.setAttribute("open", "");
+        leftPanel.setAttribute("open", "true");
       });
 
       rightButton.addEventListener("click", (event) => {
-        rightPanel.setAttribute("open", "");
+        rightPanel.setAttribute("open", "true");
       });
 
       bottomButton.addEventListener("click", (event) => {
-        bottomPanel.setAttribute("open", "");
+        bottomPanel.setAttribute("open", "true");
       });
 
       topButton.addEventListener("click", (event) => {
-        topPanel.setAttribute("open", "");
+        topPanel.setAttribute("open", "true");
       });
     </script>
   </body>

@@ -3,7 +3,7 @@
   transition-property: visibility;
 }
 
-:host([open]) {
+:host([open="true"]) {
   visibility: visible;
 
   .slide-panel__backdrop {
