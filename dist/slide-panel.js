@@ -67,7 +67,7 @@ class SlidePanel extends HTMLElement {
         root === null || root === void 0 ? void 0 : root.setAttribute("aria-hidden", "true");
         if (root) {
             clearTimeout(this.timeoutId);
-            this.timeoutId = setTimeout(() => {
+            this.timeoutId = window.setTimeout(() => {
                 root.style.visibility = "hidden";
             }, parseInt(this.transitionDuration));
         }
@@ -84,7 +84,7 @@ class SlidePanel extends HTMLElement {
         if (panel) {
             panel.style.removeProperty("transform");
             clearTimeout(this.timeoutId);
-            this.timeoutId = setTimeout(() => {
+            this.timeoutId = window.setTimeout(() => {
                 panel.style.visibility = "hidden";
             }, parseInt(this.transitionDuration));
         }
@@ -235,4 +235,4 @@ class SlidePanel extends HTMLElement {
     }
 }
 window.customElements.define("slide-panel", SlidePanel);
-//# sourceMappingURL=main.js.map
+//# sourceMappingURL=slide-panel.js.map
