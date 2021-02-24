@@ -29,7 +29,7 @@ Visit this [Code Sandbox](https://codesandbox.io/s/slide-panel-yejbt) for an exa
 Add the following script tag to your `index.html`:
 
 ```
-<script src="http://unpkg.com/slide-panel/dist/main.js"></script>
+<script src="http://unpkg.com/slide-panel/dist/slide-panel.min.js"></script>
 ```
 
 ### Option 2 - React, Angular or Vue
