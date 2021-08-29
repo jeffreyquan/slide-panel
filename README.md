@@ -16,7 +16,7 @@ Features:
 
 ### HTML
 
-Visit the following [link](https://codepen.io/jeffreyquan/pen/yLVXbEa) for an example of usage in plain HTML.
+Visit the [CodePen](https://codepen.io/jeffreyquan/pen/yLVXbEa) for an example of usage in plain HTML.
 
 ### React
 
